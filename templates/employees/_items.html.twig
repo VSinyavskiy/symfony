@@ -1,0 +1,8 @@
+{% for key,employee in employees %}
+  <tr>
+    <th scope="row">{{ key + 1 }}</th>
+    <td>{{ employee.firstName }}</td>
+    <td>{{ employee.lastName }}</td>
+    <td>{{ employee.lastName }}</td>
+  </tr>
+{% endfor %}

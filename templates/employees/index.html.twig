@@ -1,0 +1,28 @@
+{% extends 'base.html.twig' %}
+
+{% block content %}
+    <form id="employees-search" class="form-inline" action="{{ url('employees') }}">
+      <div class="form-group mb-2">
+        <input type="text" class="form-control" id="search" placeholder="Enter search...">
+      </div>
+      <button type="submit" class="btn btn-primary mb-2 mx-sm-3">Search</button>
+    </form>
+
+    <table id="employees" class="table">
+      <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">
+            <a class="order" href="#" attribute="firstName">First Name</a>
+          </th>
+          <th scope="col">Last Name</th>
+          <th scope="col">Phones</th>
+        </tr>
+      </thead>
+      <tbody>
+
+        {% include 'employees/_items.html.twig' %}
+
+      </tbody>
+    </table>
+{% endblock %}
