@@ -5,7 +5,7 @@ namespace App\Repository;
 use App\Entity\Employee;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Symfony\Bridge\Doctrine\RegistryInterface;
-use App\RequestPresenter\EmployeeRequestPresenter;
+use App\RequestPresenter\EmployeeWebRequestPresenter;
 
 /**
  * @method Employee|null find($id, $lockMode = null, $lockVersion = null)
@@ -23,13 +23,13 @@ class EmployeeRepository extends ServiceEntityRepository
     /**
      * @return Employee[] Returns an array of Employee objects
      */
-    public function findByFirstNameAndLastNameFields(EmployeeRequestPresenter $request)
+    public function findByFirstNameAndLastNameFields(EmployeeWebRequestPresenter $requestPresenter)
     {
         return $this->createQueryBuilder('e')
                         ->andWhere('e.firstName LIKE :val')
                         ->andWhere('e.lastName LIKE :val')
-                        ->setParameter('val', "%{$request->search}%")
-                        ->orderBy("e.{$request->orderField}", $request->order)
+                        ->setParameter('val', "%{$requestPresenter->getSearch()}%")
+                        ->orderBy("e.{$requestPresenter->getOrderField()}", $requestPresenter->getOrderType())
                         ->getQuery()
                         ->getResult();
     }

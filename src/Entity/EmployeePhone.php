@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\EmployeePhoneRepository")
@@ -22,10 +23,11 @@ class EmployeePhone
      * @ORM\ManyToOne(targetEntity="App\Entity\Employee", inversedBy="employeePhones")
      * @ORM\JoinColumn(nullable=false)
      */
-    private $employee_id;
+    private $employee;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank()
      */
     private $phone;
 
@@ -36,12 +38,12 @@ class EmployeePhone
 
     public function getEmployeeId(): ?Employee
     {
-        return $this->employee_id;
+        return $this->employee;
     }
 
-    public function setEmployeeId(?Employee $employee_id): self
+    public function setEmployeeId(?Employee $employee): self
     {
-        $this->employee_id = $employee_id;
+        $this->employee = $employee;
 
         return $this;
     }

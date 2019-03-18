@@ -9,6 +9,8 @@
     <title>Test task of Sinyavsky Vladislav</title>
 
     {% block stylesheets %}
+      {{ encore_entry_link_tags('vendor') }}
+
       {{ encore_entry_link_tags('app') }}
     {% endblock %}
 
@@ -37,11 +39,7 @@
     </div>
 
     {% block javascripts %}
-      <script
-        src="http://code.jquery.com/jquery-3.3.1.min.js"
-        integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
-        crossorigin="anonymous">
-      </script>
+      {{ encore_entry_script_tags('vendor') }}
 
       {{ encore_entry_script_tags('app') }}
     {% endblock %}

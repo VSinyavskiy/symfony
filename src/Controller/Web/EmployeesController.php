@@ -7,7 +7,7 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\JsonResponse;
 
-use App\RequestPresenter\EmployeeRequestPresenter;
+use App\RequestPresenter\EmployeeWebRequestPresenter;
 use App\Repository\EmployeeRepository;
 
 class EmployeesController extends AbstractController
@@ -22,8 +22,8 @@ class EmployeesController extends AbstractController
      */
     public function index(Request $request)
     {
-        $request   = new EmployeeRequestPresenter($request);
-        $employees = $this->employeeRepository->findByFirstNameAndLastNameFields($request);
+        $requestPresenter = new EmployeeWebRequestPresenter($request);
+        $employees        = $this->employeeRepository->findByFirstNameAndLastNameFields($requestPresenter);
 
         if ($request->isXmlHttpRequest()) {
             return new JsonResponse([

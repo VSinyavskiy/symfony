@@ -6,9 +6,10 @@
  */
 
 // any CSS you require will output into a single css file (app.css in this case)
-require('../css/bootstrap.4.3.min.css');
 require('../css/fixes.css');
 require('../css/app.css');
+
+$ = require('jquery');
 
 $(function() {
     var $table = $('#employees');
