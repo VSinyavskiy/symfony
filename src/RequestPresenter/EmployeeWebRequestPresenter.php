@@ -9,10 +9,10 @@ class EmployeeWebRequestPresenter
     protected $search;
     protected $order;
 
-    public function __construct(Request $request)
+    public function __construct(string $search = null, string $order = null)
     {
-        $this->setSearch($request->query->get('search'));
-        $this->setOrder($request->query->get('order'));
+        $this->setSearch($search);
+        $this->setOrder($order);
     }
 
     public function getSearch(): string

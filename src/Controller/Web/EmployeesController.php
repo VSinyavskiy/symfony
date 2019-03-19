@@ -22,7 +22,7 @@ class EmployeesController extends AbstractController
      */
     public function index(Request $request)
     {
-        $requestPresenter = new EmployeeWebRequestPresenter($request);
+        $requestPresenter = new EmployeeWebRequestPresenter($request->query->get('search'), $request->query->get('order'));
         $employees        = $this->employeeRepository->findByFirstNameAndLastNameFields($requestPresenter);
 
         if ($request->isXmlHttpRequest()) {
