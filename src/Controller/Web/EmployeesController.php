@@ -8,6 +8,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\JsonResponse;
 
 use App\RequestPresenter\EmployeeWebRequestPresenter;
+use App\Presenter\Employee\WebPresenter;
 use App\Repository\EmployeeRepository;
 
 class EmployeesController extends AbstractController
@@ -22,8 +23,16 @@ class EmployeesController extends AbstractController
      */
     public function index(Request $request)
     {
-        $requestPresenter = new EmployeeWebRequestPresenter($request->query->get('search'), $request->query->get('order'));
-        $employees        = $this->employeeRepository->findByFirstNameAndLastNameFields($requestPresenter);
+        $requestPresenter = new EmployeeWebRequestPresenter(
+                                    $request->query->get('search'),
+                                    $request->query->get('order')
+                            );
+        $findedEmployees  = $this->employeeRepository->findByFirstNameAndLastNameFields($requestPresenter);
+
+        $employees = [];
+        foreach ($findedEmployees as $item) {
+            $employees[] = new WebPresenter($item);
+        }
 
         if ($request->isXmlHttpRequest()) {
             return new JsonResponse([

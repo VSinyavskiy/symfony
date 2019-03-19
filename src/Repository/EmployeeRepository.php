@@ -26,11 +26,13 @@ class EmployeeRepository extends ServiceEntityRepository
     public function findByFirstNameAndLastNameFields(EmployeeWebRequestPresenter $requestPresenter)
     {
         return $this->createQueryBuilder('e')
+                        ->innerJoin('e.employeePhones', 'ep')
+                        ->addSelect('ep')
                         ->andWhere('e.firstName LIKE :val')
-                        ->andWhere('e.lastName LIKE :val')
+                        ->orWhere('e.lastName LIKE :val')
                         ->setParameter('val', "%{$requestPresenter->getSearch()}%")
                         ->orderBy("e.{$requestPresenter->getOrderField()}", $requestPresenter->getOrderType())
                         ->getQuery()
-                        ->getResult();
+                        ->execute();
     }
 }

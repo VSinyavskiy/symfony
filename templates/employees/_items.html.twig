@@ -1,8 +1,18 @@
+{#{% macro printGenusScientistRow(employee) %}
+  <tr>
+    <th scope="row">{{ key + 1 }}</th>
+    <td>{{ employee.firstName }}</td>
+    <td>{{ employee.lastName }}</td>
+    <td>{{ employee.employeePhones }}</td>
+  </tr>
+{% endmacro %}#}
+
+
 {% for key,employee in employees %}
   <tr>
     <th scope="row">{{ key + 1 }}</th>
     <td>{{ employee.firstName }}</td>
     <td>{{ employee.lastName }}</td>
-    <td>{{ employee.lastName }}</td>
+    <td>{{ employee.employeeWebPhones | raw }}</td>
   </tr>
 {% endfor %}

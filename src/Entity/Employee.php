@@ -34,7 +34,7 @@ class Employee
     private $lastName;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\EmployeePhone", mappedBy="employee_id", orphanRemoval=true)
+     * @ORM\OneToMany(targetEntity="App\Entity\EmployeePhone", mappedBy="employee", orphanRemoval=true)
      */
     private $employeePhones;
 

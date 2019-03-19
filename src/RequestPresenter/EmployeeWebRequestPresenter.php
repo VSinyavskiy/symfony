@@ -39,14 +39,16 @@ class EmployeeWebRequestPresenter
 
     protected function setOrder($order): void
     {
+        $this->order['field'] = 'id';
+        $this->order['type']  = 'ASC';
+
         if (isset($order)) {
             $orderArray = explode(':', $order);
+        }
 
+        if (isset($orderArray[1]) && ! empty($orderArray[1])) {
             $this->order['field'] = $orderArray[0];
             $this->order['type']  = $orderArray[1];
-        } else {
-            $this->order['field'] = 'id';
-            $this->order['type']  = 'ASC';
         }
 
         return;
